@@ -51,7 +51,7 @@ public:
         if (initialized) return;
         initialized = true;
 
-        printf("Initializing ...\n");
+        printf("Hardware Initializing ...\n");
 
         BigInt<254> m = _m;
         BigInt<254> order = _order;
@@ -85,7 +85,7 @@ public:
         msm_ip->write_register(0x30, msm_o->address());
         msm_ip->write_register(0x34, msm_o->address() >> 32);
 
-        printf("Initialized.\n");
+        printf("Hardware Initialized.\n");
     }
     virtual void *hw_ntt_i() {
         assert(initialized);
