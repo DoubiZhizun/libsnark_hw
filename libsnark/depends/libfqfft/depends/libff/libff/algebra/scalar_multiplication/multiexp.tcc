@@ -411,7 +411,7 @@ libff::alt_bn128_G1 multi_exp(typename std::vector<libff::alt_bn128_G1>::const_i
 {
     const size_t total = vec_end - vec_start;
 
-    if (total <= (1lu << 27)) {
+    if (total >= (1lu << 18) && total <= (1lu << 27)) {
         hw_interface *hw_device = hw_get_instance();
 
         uint64_t *msm_scalar_i = (uint64_t *)(hw_device->hw_msm_scalar_i());
@@ -523,7 +523,7 @@ libff::alt_bn128_G1 multi_exp_with_mixed_addition(typename std::vector<libff::al
 {
     assert(std::distance(vec_start, vec_end) == std::distance(scalar_start, scalar_end));
     const size_t total = vec_end - vec_start;
-    if (total <= (1lu << 27)) return multi_exp<libff::alt_bn128_G1, libff::alt_bn128_Fr, Method>(vec_start, vec_end, scalar_start, scalar_end, chunks);
+    if (total >= (1lu << 18) && total <= (1lu << 27)) return multi_exp<libff::alt_bn128_G1, libff::alt_bn128_Fr, Method>(vec_start, vec_end, scalar_start, scalar_end, chunks);
 
     enter_block("Process scalar vector");
     auto value_it = vec_start;

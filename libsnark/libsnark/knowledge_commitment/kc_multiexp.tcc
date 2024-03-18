@@ -32,7 +32,7 @@ typename std::enable_if<std::is_same<T1, libff::alt_bn128_G1>().value || std::is
     auto value_it = vec.values.begin() + offset;
 
     const size_t total = max_idx - min_idx;
-    if (total <= (1lu << 27)) {
+    if (total >= (1lu << 18) && total <= (1lu << 27)) {
         std::vector<T1> vec_g(total);
         std::vector<T2> vec_h(total);
         std::vector<libff::alt_bn128_Fr> scalar(total);
